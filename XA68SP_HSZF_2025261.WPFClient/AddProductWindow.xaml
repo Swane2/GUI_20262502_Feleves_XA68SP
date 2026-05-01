@@ -1,0 +1,24 @@
+﻿<Window x:Class="XA68SP_HSZF_2025261.WPFClient.AddProductWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:XA68SP_HSZF_2025261.WPFClient"
+        mc:Ignorable="d"
+        Title="AddProductWindow" Height="450" Width="800">
+    <StackPanel Margin="20">
+        <TextBlock Text="Név" />
+        <TextBox x:Name="NameBox" />
+        <TextBlock Text="Márka" />
+        <TextBox x:Name="BrandBox" />
+        <TextBlock Text="Kategória" />
+        <TextBox x:Name="CategoryBox" />
+        <TextBlock Text="Leírás" />
+        <TextBox x:Name="DescriptionBox" />
+        <TextBlock Text="Ár" />
+        <TextBox x:Name="PriceBox" />
+        <TextBlock Text="Készlet" />
+        <TextBox x:Name="StockBox" Text="0" />
+        <Button Content="Mentés" Click="Save_Click"/>
+    </StackPanel>
+</Window>
