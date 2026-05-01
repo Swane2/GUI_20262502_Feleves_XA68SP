@@ -17,6 +17,7 @@ namespace XA68SP_HSZF_2025261.WPFClient
 {
     public partial class ProductDetailsWindow : Window
     {
+        // Termék adatainak megjelenítése
         public ProductDetailsWindow(Product product)
         {
             InitializeComponent();
