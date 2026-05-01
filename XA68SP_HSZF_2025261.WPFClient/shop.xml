@@ -1,0 +1,63 @@
+<Webshop>
+  <Products>
+    <Product>
+      <Id>1</Id>
+      <Name>HP Pavilion 14</Name>
+      <Brand>HP</Brand>
+      <Category>Laptopok</Category>
+      <Price>380000</Price>
+      <Stock>20</Stock>
+      <Description>14" laptop, 16GB RAM, 512GB SSD, Intel i5, FHD kijelző</Description>
+    </Product>
+    <Product>
+      <Id>2</Id>
+      <Name>LG UltraGear 27"</Name>
+      <Brand>LG</Brand>
+      <Category>Monitorok</Category>
+      <Price>120000</Price>
+      <Stock>18</Stock>
+      <Description>27" gaming monitor, 144Hz, 1ms, IPS panel, QHD felbontás</Description>
+    </Product>
+    <Product>
+      <Id>3</Id>
+      <Name>Razer DeathAdder V3</Name>
+      <Brand>Razer</Brand>
+      <Category>Egér és Billentyűzet</Category>
+      <Price>28000</Price>
+      <Stock>9</Stock>
+      <Description>Vezetékes gaming egér, 30000 DPI, könnyű kialakítás</Description>
+    </Product>
+  </Products>
+
+  <Customers>
+    <Customer>
+      <Id>1</Id>
+      <Name>Emily Parker</Name>
+      <Email>emily.parker@example.com</Email>
+      <PhoneNumber>+111222333</PhoneNumber>
+    </Customer>
+    <Customer>
+      <Id>2</Id>
+      <Name>Robert Miles</Name>
+      <Email>robert.miles@example.com</Email>
+      <PhoneNumber>+444555666</PhoneNumber>
+    </Customer>
+  </Customers>
+
+  <Orders>
+    <Order>
+      <Id>1</Id>
+      <ProductId>1</ProductId>
+      <CustomerId>1</CustomerId>
+      <Quantity>1</Quantity>
+      <OrderDate>2024-10-05</OrderDate>
+    </Order>
+    <Order>
+      <Id>2</Id>
+      <ProductId>3</ProductId>
+      <CustomerId>2</CustomerId>
+      <Quantity>4</Quantity>
+      <OrderDate>2024-10-18</OrderDate>
+    </Order>
+  </Orders>
+</Webshop>
