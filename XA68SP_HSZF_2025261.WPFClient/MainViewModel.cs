@@ -12,17 +12,22 @@ using XA68SP_HSZF_2025261.Models;
 
 namespace XA68SP_HSZF_2025261.WPFClient
 {
+    // Ez kezeli a fő ablak működését.
+    // Itt vannak a termékek és a gombokhoz tartozó műveletek.
     public class MainViewModel
     {
+        // Service az adatok kezelésére,
+        // és a termékek listája, amit a felületen látunk
         private readonly IProductService productService;
 
         public ObservableCollection<Product> Products { get; set; }
-
+        // Ezek kezelik a gombokat (hozzáadás, törlés, szerkesztés, részletek)
         public IRelayCommand AddProductCommand { get; }
         public IRelayCommand DeleteProductCommand { get; }
         public IRelayCommand ShowDetailsCommand { get; }
         public IRelayCommand EditProductCommand { get; }
 
+        // adatok betöltése, gombok működésének beállítása
         public MainViewModel(IProductService productService)
         {
             this.productService = productService;
@@ -41,6 +46,7 @@ namespace XA68SP_HSZF_2025261.WPFClient
                     canExecute: param => param is Product);
         }
 
+        // Új termék ablak megnyitása
         private void OpenAddWindow()
         {
             var window = App.ServiceProvider.GetService<AddProductWindow>();
@@ -48,25 +54,26 @@ namespace XA68SP_HSZF_2025261.WPFClient
 
             Refresh();
         }
-
+        // Termék törlése
         private void DeleteProduct(Product product)
         {
             productService.DeleteProduct(product.Id);
             Refresh();
         }
-
+        // Lista frissítése
         private void Refresh()
         {
             Products.Clear();
             foreach (var p in productService.GetAllProducts())
                 Products.Add(p);
         }
-
+        // Részletek megjelenítése
         private void OpenDetailsWindow(Product product)
         {
             var window = new ProductDetailsWindow(product);
             window.ShowDialog();
         }
+        // Szerkesztő ablak megnyitása
         private void OpenEditWindow(Product product)
         {
             var window = new EditProductWindow(product);

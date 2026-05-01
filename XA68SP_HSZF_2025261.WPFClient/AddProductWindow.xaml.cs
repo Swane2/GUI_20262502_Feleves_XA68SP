@@ -22,11 +22,17 @@ namespace XA68SP_HSZF_2025261.WPFClient
     /// </summary>
     public partial class AddProductWindow : Window
     {
+        // Új termék hozzáadása ablak.
         public AddProductWindow()
         {
             InitializeComponent();
         }
 
+        // Save gomb:
+        // - kiolvassa az adatokat
+        // - létrehoz egy új terméket
+        // - elmenti
+        // - bezárja az ablakot
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             var productService = App.ServiceProvider.GetService<IProductService>();

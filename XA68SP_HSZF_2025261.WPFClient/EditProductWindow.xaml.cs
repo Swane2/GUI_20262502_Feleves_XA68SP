@@ -19,6 +19,8 @@ namespace XA68SP_HSZF_2025261.WPFClient
 {
     public partial class EditProductWindow : Window
     {
+        // Termék szerkesztése ablak.
+        // A mezők már ki vannak töltve a meglévő adatokkal.
         private readonly Product product;
 
         public EditProductWindow(Product product)
@@ -33,7 +35,10 @@ namespace XA68SP_HSZF_2025261.WPFClient
             PriceBox.Text = product.Price.ToString();
             StockBox.Text = product.Stock.ToString();
         }
-
+        // Save gomb:
+        // - módosítja az adatokat
+        // - elmenti
+        // - bezárja az ablakot
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             var productService = App.ServiceProvider.GetService<IProductService>();

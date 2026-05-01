@@ -10,6 +10,13 @@ using XA68SP_HSZF_2025261.Persistence.MsSql;
 
 namespace XA68SP_HSZF_2025261.WPFClient
 {
+    // Az alkalmazás belépési pontja.
+    // Itt történik az alkalmazás inicializálása.
+    //
+    // Itt állítjuk be a szükséges szolgáltatásokat (service-ek),
+    // valamint innen indul a főablak (MainWindow).
+    //
+    // Az adatok betöltése (XML vagy adatbázis) is itt történik induláskor.
     public partial class App : System.Windows.Application
     {
         public static ServiceProvider ServiceProvider { get; private set; }

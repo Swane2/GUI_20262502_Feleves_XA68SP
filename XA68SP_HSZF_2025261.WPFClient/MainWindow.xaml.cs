@@ -14,9 +14,11 @@ namespace XA68SP_HSZF_2025261.WPFClient
 {
     public partial class MainWindow : Window
     {
+        // Itt kapcsoljuk össze az ablakot a MainViewModel-lel.
         public MainWindow()
         {
             InitializeComponent();
+            // A ViewModel lekérése és beállítása
             DataContext = App.ServiceProvider.GetService<MainViewModel>();
         }
     }
