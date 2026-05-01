@@ -54,7 +54,7 @@ namespace XA68SP_HSZF_2025261.WPFClient
 
         private void LoadData()
         {
-            string filePath = "shop.xml";
+            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "shop.xml"); ;
 
             if (!File.Exists(filePath))
                 return;
