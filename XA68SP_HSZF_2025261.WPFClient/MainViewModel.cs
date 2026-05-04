@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,13 +15,37 @@ namespace XA68SP_HSZF_2025261.WPFClient
 {
     // Ez kezeli a fő ablak működését.
     // Itt vannak a termékek és a gombokhoz tartozó műveletek.
-    public class MainViewModel
+    public class MainViewModel : INotifyPropertyChanged
     {
         // Service az adatok kezelésére,
         // és a termékek listája, amit a felületen látunk
         private readonly IProductService productService;
 
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         public ObservableCollection<Product> Products { get; set; }
+        public ObservableCollection<Product> AllProducts { get; set; }
+
+        private string searchText;
+        public string SearchText
+        {
+            get { return searchText; }
+            set
+            {
+                searchText = value;
+                Refresh();
+                OnPropertyChanged(nameof(SearchText));
+            }
+        }
+
+        public int ProductCount => Products.Count;
+        public int TotalStock => Products.Sum(p => p.Stock);
+        public decimal AveragePrice => Products.Count == 0 ? 0 : Products.Average(p => p.Price);
         // Ezek kezelik a gombokat (hozzáadás, törlés, szerkesztés, részletek)
         public IRelayCommand AddProductCommand { get; }
         public IRelayCommand DeleteProductCommand { get; }
@@ -32,7 +57,8 @@ namespace XA68SP_HSZF_2025261.WPFClient
         {
             this.productService = productService;
 
-            Products = new ObservableCollection<Product>(productService.GetAllProducts());
+            AllProducts = new ObservableCollection<Product>(productService.GetAllProducts());
+            Products = new ObservableCollection<Product>(AllProducts);
 
             AddProductCommand = new RelayCommand(OpenAddWindow);
             DeleteProductCommand = new RelayCommand<object>(
@@ -63,9 +89,28 @@ namespace XA68SP_HSZF_2025261.WPFClient
         // Lista frissítése
         private void Refresh()
         {
-            Products.Clear();
+            AllProducts.Clear();
+
             foreach (var p in productService.GetAllProducts())
+                AllProducts.Add(p);
+
+            Products.Clear();
+
+            var filteredProducts = AllProducts.AsEnumerable();
+
+            if (!string.IsNullOrWhiteSpace(SearchText))
+            {
+                filteredProducts = filteredProducts.Where(p =>
+                    p.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
+                    p.Brand.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
+                    p.Category.Contains(SearchText, StringComparison.OrdinalIgnoreCase));
+            }
+
+            foreach (var p in filteredProducts)
                 Products.Add(p);
+            OnPropertyChanged(nameof(ProductCount));
+            OnPropertyChanged(nameof(TotalStock));
+            OnPropertyChanged(nameof(AveragePrice));
         }
         // Részletek megjelenítése
         private void OpenDetailsWindow(Product product)
