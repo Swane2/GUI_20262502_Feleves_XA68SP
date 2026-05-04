@@ -8,13 +8,70 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <StackPanel>
+            <TextBlock Text="Termékkezelő"
+           FontSize="24"
+           FontWeight="Bold"
+           Margin="10"/>
 
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <TextBlock Text="Keresés:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBox Width="250"
+             Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <TextBlock Text="Termékek száma: " FontWeight="Bold"/>
+                <TextBlock Text="{Binding ProductCount}" Margin="0,0,20,0"/>
+
+                <TextBlock Text="Összes készlet: " FontWeight="Bold"/>
+                <TextBlock Text="{Binding TotalStock}" Margin="0,0,20,0"/>
+
+                <TextBlock Text="Átlagár: " FontWeight="Bold"/>
+                <TextBlock Text="{Binding AveragePrice}" />
+            </StackPanel>
             <Button Content="Új termék" Command="{Binding AddProductCommand}" />
 
             <DataGrid ItemsSource="{Binding Products}" AutoGenerateColumns="False">
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+
+                            <!-- Ha nincs készleten, piros lesz -->
+                            <DataTrigger Binding="{Binding Stock}" Value="0">
+                                <Setter Property="Background" Value="#FFB6B6"/>
+                            </DataTrigger>
+
+                            <!-- Ha kevés van készleten, sárga lesz -->
+                            <DataTrigger Binding="{Binding Stock}" Value="1">
+                                <Setter Property="Background" Value="#FFF3B0"/>
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding Stock}" Value="2">
+                                <Setter Property="Background" Value="#FFF3B0"/>
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding Stock}" Value="3">
+                                <Setter Property="Background" Value="#FFF3B0"/>
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding Stock}" Value="4">
+                                <Setter Property="Background" Value="#FFF3B0"/>
+                            </DataTrigger>
+
+                            <!-- Ha pontosan 20 van készleten, zöld lesz -->
+                            <DataTrigger Binding="{Binding Stock}" Value="20">
+                                <Setter Property="Background" Value="#C8F7C5"/>
+                            </DataTrigger>
+
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Név" Binding="{Binding Name}" />
                     <DataGridTextColumn Header="Ár" Binding="{Binding Price}" />
+                    <DataGridTextColumn Header="Márka" Binding="{Binding Brand}" />
+                    <DataGridTextColumn Header="Kategória" Binding="{Binding Category}" />
+                    <DataGridTextColumn Header="Készlet" Binding="{Binding Stock}" />
 
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
